@@ -7,7 +7,10 @@ import {ERC20Permit, Nonces} from "@openzeppelin/contracts/token/ERC20/extension
 import {ERC20Votes} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
-    constructor() ERC20("My Governance Token", "MGT") ERC20Permit("My Governance Token") {}
+    constructor()
+        ERC20("My Governance Token", "MGT")
+        ERC20Permit("My Governance Token")
+    {}
 
     // The following functions are overrides required by Solidity.
 
@@ -15,11 +18,17 @@ contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
         _mint(to, amount);
     }
 
-    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Votes) {
+    function _update(
+        address from,
+        address to,
+        uint256 value
+    ) internal override(ERC20, ERC20Votes) {
         super._update(from, to, value);
     }
 
-    function nonces(address owner) public view override(ERC20Permit, Nonces) returns (uint256) {
+    function nonces(
+        address owner
+    ) public view override(ERC20Permit, Nonces) returns (uint256) {
         return super.nonces(owner);
     }
 }
